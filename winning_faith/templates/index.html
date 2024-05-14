@@ -29,16 +29,16 @@
                 <div class="mt-3 mb-3">
                     <h5 class="text-secondary">ADMINISTRATION</h5>
                     <h6 class="text-white">Academic calender</h6>
+                    <h6 class="text-white">Classes</h6>
                     <h6 class="text-white">Finance</h6>
                     <h6 class="text-white">Certificates</h6>
                     <h6 class="text-white">Testimonials</h6>
                 </div>
                 <div class="mt-3 mb-3">
                     <h5 class="text-secondary">STUDENT</h5>
-                    <h6 class="text-white">Enroll new student</h6>
+                    <a href="{% url 'enroll' %}" class="text-decoration-none"><h6 class="text-white">Enroll new student</h6></a>
                     <h6 class="text-white">Student info</h6>
                     <h6 class="text-white">Student fees</h6>
-                    <h6 class="text-white">Classrooms</h6>
                 </div>
                 <div class="mt-3 mb-3">
                     <h5 class="text-secondary">TEACHER</h5>
@@ -63,7 +63,7 @@
                             <path fill-rule="evenodd" d="M10.5 6a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0zm-8 0a3.5 3.5 0 1 0 7 0 3.5 3.5 0 0 0-7 0z"/>
                           </svg>
                         </span>
-                        <input type="text" class="form-control" placeholder="search student .." aria-label="Search" aria-describedby="button-addon2">
+                        <input type="search" class="form-control" placeholder="search student .." aria-label="Search" aria-describedby="button-addon2">
                       </div>
 
                 </div>
@@ -85,8 +85,8 @@
                 </div>
             </div>
             
+            {% block content %}
             <div class="container-fluid row home w-100 mt-3">
-                {% block content %}
                 <h4 class="blue-text mt-2 mb-3 display-6">Overview</h4>
                 <!-- card elements -->
                 <div class="col-6 col-lg-3">
@@ -201,8 +201,8 @@
                     </div>
 
                 </div>
-                {% endblock content %}
             </div>
+            {% endblock content %}
                 
                 
         </div>
