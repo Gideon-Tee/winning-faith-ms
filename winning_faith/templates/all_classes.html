@@ -1,0 +1,30 @@
+{% extends 'student_info.html' %}
+
+
+{% block db_table_header %}
+<h5 class="blue-text display-6 mb-3">Classrooms</h5>
+{% endblock db_table_header %}
+    
+
+
+{% block db_table %}
+<table class="table table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Number of students</th>
+        <th>Class Teacher</th>
+
+
+    </tr>
+    {% for class in classes %}
+    <tr>
+        <td>{{class.name}}</td>
+        <td>{{class.num_of_students}}</td>
+        <td>{{class.class_teacher}}</td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+{% endblock db_table %}
+    

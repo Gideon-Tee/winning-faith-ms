@@ -37,7 +37,14 @@
                     <div class="row mt-3">
                         <div class="col-12 col-lg-4">
                             <label for="classroom" class="form-label">Class <span class="text-danger">*</span></label>
-                            <input type="text" required class="form-control" name="classroom">
+                            <select class="form-select" name="classroom" id="classroom" aria-label="Default select example">
+                                <option selected>Class</option>
+                                {% for class in classes %}
+                                <option value="{{class.name}}">{{class.name}}</option>
+                                {% endfor %}
+                                    
+                            </select>
+                            <!-- <input type="text" required class="form-control" name="classroom"> -->
                         </div>
                         <div class="col-12 col-lg-4" >
                             <label for="fees_paid" class="form-label">Fees paid <span class="text-danger">*</span></label>
