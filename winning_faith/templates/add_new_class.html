@@ -2,55 +2,42 @@
 
 
 {% block content%}
-<div class="container-fluid row home mt-3 pb-4 h-100">
-    <h1 class="display-6 mt-2 mb-0 text-center blue-text">New Class</h1><hr>
-    <div class="container row ">
-        <div class="container-fluid">
-            <form class="row form" action="add_new_class" method="POST">
+<div class="container-fluid row home mt-3 justify-content-center" style="padding-bottom: 18rem;">
+    <h1 class="display-6 mt-2 mb-2 text-center blue-text">New Class</h1><hr>
+    <div class="container row w-100">
+        <div class="container-fluid justify-content-center w-100">
+            <form class="row form justify-content-center w-100 shadow-sm mt-4" action="add_new_class" method="POST">
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-12 col-lg-6">
-                        <label for="fname" class="form-label">First name <span class="text-danger">*</span></label>
-                        <input type="text" required class="form-control" name="fname">
+                        <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+                        <input type="text" required class="form-control" name="name">
                     </div>
                     <div class="col-12 col-lg-6">
-                        <label for="lname" class="form-label">Last name <span class="text-danger">*</span> </label>
-                        <input type="text" required class="form-control" name="lname">
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-12 col-lg-6">
-                        <label for="other_names" class="form-label">Other name(s)</label>
-                        <input type="text" class="form-control" name="other_names">
-                    </div>
-                    <div class="col-12 col-lg-6">
-                        <label for="category" class="form-label">Enrollment Category <span class="text-danger">*</span> </label>
+                        <label for="name" class="form-label">Category <span class="text-danger">*</span></label>
                         <select class="form-select" name="category" aria-label="Default select example">
                             <option selected>Category</option>
                             <option value="crech">Crech / Kindergarten</option>
                             <option value="lower_primary">Lower Primary</option>
                             <option value="upper_primary">Upper Primary</option>
                             <option value="jhs">JHS</option>
-                        </select>
+                        </select>                        
                     </div>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-12 col-lg-4">
-                        <label for="classroom" class="form-label">Class <span class="text-danger">*</span></label>
-                        <input type="text" required class="form-control" name="classroom">
+                <div class="row mt-3">   
+                    <div class="col-12 col-lg-6">
+                        <label for="lname" class="form-label">Class teacher <span class="text-danger">*</span> </label>
+                        <input type="text" required class="form-control" name="lname">
                     </div>
-                    <div class="col-12 col-lg-4" >
-                        <label for="fees_paid" class="form-label">Fees paid <span class="text-danger">*</span></label>
-                        <input type="number" required class="form-control" name="fees_paid">
-                    </div>
-                    <div class="col-12 col-lg-4" >
-                        <label for="date_enrolled" class="form-label">Date enrolled <span class="text-danger">*</span></label>
-                        <input type="date" required class="form-control" name="date_enrolled">
+                    <div class="col-12 col-lg-6">
+                        <label for="lname" class="form-label">Date <span class="text-danger">*</span> </label>
+                        <input type="date" required class="form-control" name="lname">
                     </div>
 
                 </div>
+               
                 <div class="row w-100 mt-5 justify-content-center mb-5">
-                    <input type="submit" class="btn btn-outline-primary " value="Enroll">
+                    <input type="submit" class="col-auto btn btn-primary " value="Add Class">
                 </div>
             </form>
         </div>

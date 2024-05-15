@@ -1,10 +1,15 @@
 {% extends 'student_info.html' %}
+{% load static %}
 
+{% block db_table_header_text %}
+    Classrooms
+{% endblock db_table_header_text %}
 
-{% block db_table_header %}
-<h5 class="blue-text display-6 mb-3">Classrooms</h5>
-{% endblock db_table_header %}
-    
+{% block db_table_header_icon %}
+<a href="{% url 'add_new_class' %}" class="text-decoration-none" title="new classroom">
+    <img src="{% static 'add_class.png' %}" width="35" height="35" class="img-fluid">
+</a>
+{% endblock db_table_header_icon %}
 
 
 {% block db_table %}
@@ -13,12 +18,10 @@
         <th>Name</th>
         <th>Number of students</th>
         <th>Class Teacher</th>
-
-
     </tr>
     {% for class in classes %}
     <tr>
-        <td>{{class.name}}</td>
+        <a href=""><td>{{class.name}}</td></a>
         <td>{{class.num_of_students}}</td>
         <td>{{class.class_teacher}}</td>
     </tr>

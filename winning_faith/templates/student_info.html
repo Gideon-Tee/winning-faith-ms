@@ -7,11 +7,19 @@
     {% block db_table_header %}
     <div class="row mb-3 w-100">
         <div class="col col-lg-6">
-            <h5 class="d-inline blue-text display-6">Student Database</h5>
+            <h5 class="d-inline blue-text display-6">
+                {% block db_table_header_text %}
+                Student Database
+                {% endblock %}
+            </h5>
         </div>
         <div class="col col-lg-6">
             <span class="d-inline float-end">
-               <a href="{% url 'enroll' %}" class="text-decoration-none" title="new student"><img src="{% static 'add_student.png' %}" width="35" height="35" class="img-fluid"></a>
+                {% block db_table_header_icon %}
+                <a href="{% url 'enroll' %}" class="text-decoration-none" title="new student">   
+                        <img src="{% static 'add_student.png' %}" width="35" height="35" class="img-fluid">    
+                </a>
+                {% endblock db_table_header_icon %}    
             </span>
         </div>
     </div>
