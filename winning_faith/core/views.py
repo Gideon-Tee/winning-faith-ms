@@ -10,8 +10,12 @@ from .models import Student, Classroom
 @login_required(login_url='login')
 def index(request):
     students = Student.objects.all()
+    jhs_students = Student.objects.filter(category='jhs')
+    # for student in jhs1_students:
+    #     student.fees_paid -= 700.00 
     context = {
-        'students': students[:5]
+        'students': students,
+        'jhs_students': jhs_students
     }
     return render(request, 'index.html', context)
 

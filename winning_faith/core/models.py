@@ -24,3 +24,13 @@ class Classroom(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+    
+class Teacher(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    fname = models.CharField(max_length=25)
+    lname = models.CharField(max_length=25)
+    other_names = models.CharField(max_length=100, blank=True)
+    assigned_class = models.ForeignKey(Classroom, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.fname} {self.lname}'

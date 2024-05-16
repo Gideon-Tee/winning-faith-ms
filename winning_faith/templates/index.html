@@ -55,7 +55,7 @@
             <!-- top header content -->
             <div class="row w-100 bg-white pt-3">
                 <div class="col-lg-8">
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-1">
                         <span class="input-group-text">
                           <!-- Bootstrap Icon for Search -->
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -86,7 +86,7 @@
             </div>
             
             {% block content %}
-            <div class="container-fluid row home w-100 mt-3 pb-4">
+            <div class="container-fluid row home w-100 mt-3 pb-5">
                 <h4 class="blue-text mt-2 mb-3 display-6">Overview</h4>
                 <!-- card elements -->
                 <div class="col-6 col-lg-3">
@@ -151,46 +151,33 @@
                 </div>
                 <div class="col-lg-6 bg-white mt-4 mb-3 rounded shadow">
                     <div class="container mb-4">
-                        <h5 class="blue-text mt-3 mb-3">JHS 3</h5>
+                        <h5 class="blue-text mt-3 mb-3">JHS</h5>
                         <div class="scrollable-div">
                             <table class="table table-striped">
                                 <tr>
                                     <th>Name</th>
+                                    <th>Class</th>
                                     <th>Fees Paid</th>
-                                    <th>Fees Owing</th>
+                                    <!-- <th>Fees Owing</th> -->
                                 </tr>
+                                
+                                {% for student in jhs_students %}
                                 <tr>
-                                    <td>Gideon Tettehfio</td>
-                                    <td>500.00</td>
-                                    <td>200.00</td>
+                                    <td>{{student.fname}} {{student.lname}}</td>
+                                    <td>{{student.classroom}}</td>
+                                    <td>{{student.fees_paid}}</td>
+                                    <!-- <td></td> -->
                                 </tr>
-                                <tr>
-                                    <td>Andrew Kudjordji</td>
-                                    <td>700.00</td>
-                                    <td> - </td>
-                                </tr>
-                                <tr>
-                                    <td>Joseph Kabutey</td>
-                                    <td>700.00</td>
-                                    <td> - </td>
-                                </tr>
-                                <tr>
-                                    <td>Catherine Sarpong</td>
-                                    <td>350.00</td>
-                                    <td>350.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Christopher Lartey</td>
-                                    <td> 00.00 </td>
-                                    <td>700.00</td>
-                                </tr>
+                                {% endfor %}
+                                    
+                                
                             </table>
                         </div>
                     </div>
 
                 </div>
                 <div class="col-lg-1"></div>
-                <div class="col-12 col-lg-5 bg-white mt-4 mb-3 rounded shadow">
+                <div class="col-12 col-lg-5 bg-white mt-4 mb-3 rounded shadow pb-4">
                     <div class="container mb-4">
                         <h5 class="blue-text mt-3 mb-3">Recently admitted students</h5>
                         <div class="scrollable-div">
