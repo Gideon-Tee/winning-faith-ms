@@ -1,0 +1,20 @@
+{% extends 'add_new_class.html' %}
+{% load static %}
+
+
+
+{% block content %}
+<div class="container-fluid row home mt-3 justify-content-center" style="height: auto;">
+    <h1 class="display-6 mt-2 mb-2 text-center blue-text">Administrator Settings</h1><hr>
+    <div class="container row w-100">
+        <div class="container-fluid justify-content-center w-100">
+            <form class="row form justify-content-center w-100 shadow-sm mt-4" action="add_new_class" method="POST">
+                {% csrf_token %}
+                
+               page under development
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+    
