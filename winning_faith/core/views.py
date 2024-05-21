@@ -6,10 +6,11 @@ from .models import Student, Classroom
 
 # Create your views here.
 
+students = Student.objects.all()
+
 
 @login_required(login_url='login')
 def index(request):
-    students = Student.objects.all()
     jhs_students = Student.objects.filter(category='jhs')
     # for student in jhs1_students:
     #     student.fees_paid -= 700.00 
@@ -24,7 +25,6 @@ def index(request):
 
 @login_required(login_url='login')
 def display_students(request):
-    students = Student.objects.all()
 
     context = {
         'students': students
@@ -36,7 +36,6 @@ def display_students(request):
 @login_required(login_url='login')
 def display_classes(request):
     classes = Classroom.objects.all()
-    students = Student.objects.all()
     for classroom in classes:
         for student in students:
             if student.classroom == classroom.name:
