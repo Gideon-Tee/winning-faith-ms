@@ -6,6 +6,11 @@
     <h1 class="display-6 mt-2 mb-2 text-center blue-text">New Class</h1><hr>
     <div class="container row w-100">
         <div class="container-fluid justify-content-center w-100">
+            
+            {% for message in messages %}
+                <h5 class="text-success">message</h5>
+            {% endfor %}
+                
             <form class="row form justify-content-center w-100 shadow-sm mt-4" action="add_new_class" method="POST">
                 {% csrf_token %}
                 <div class="row">
@@ -26,8 +31,8 @@
                 </div>
                 <div class="row mt-3">   
                     <div class="col-12 col-lg-6">
-                        <label for="lname" class="form-label">Class teacher <span class="text-danger">*</span> </label>
-                        <input type="text" required class="form-control" name="lname">
+                        <label for="class_teacher" class="form-label">Class teacher <span class="text-danger">*</span> </label>
+                        <input type="text" required class="form-control" name="class_teacher">
                     </div>
                     <div class="col-12 col-lg-6">
                         <label for="lname" class="form-label">Date <span class="text-danger">*</span> </label>

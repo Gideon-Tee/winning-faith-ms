@@ -13,6 +13,9 @@
 
 
 {% block db_table %}
+{% for message in messages %}
+    <h5 class="text-success">{{message}}</h5>
+{% endfor %}
 <table class="table table-striped">
     <tr>
         <th>Name</th>

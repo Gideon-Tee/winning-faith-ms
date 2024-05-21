@@ -15,7 +15,8 @@ def index(request):
     #     student.fees_paid -= 700.00 
     context = {
         'students': students,
-        'jhs_students': jhs_students
+        'jhs_students': jhs_students,
+        'student_population': len(students)
     }
     return render(request, 'index.html', context)
 
@@ -51,8 +52,21 @@ def display_classes(request):
 
 @login_required(login_url='login')
 def add_new_class(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        category = request.POST['category']
+        class_teacher = request.POST['class_teacher']
 
-    return render(request, 'add_new_class.html')
+        new_class = Classroom.objects.create(
+            name = name,
+            class_teacher = class_teacher,
+            category = category
+        )
+        new_class.save()
+        messages.info(request, 'Class created successfully')
+        return redirect('classes')
+    else:
+        return render(request, 'add_new_class.html')
 
 
 

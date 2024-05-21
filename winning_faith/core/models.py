@@ -21,6 +21,7 @@ class Classroom(models.Model):
     name = models.CharField(max_length=25)
     num_of_students = models.IntegerField(blank = True, default=0)
     class_teacher = models.CharField(max_length=100)
+    category = models.CharField(max_length=30, default = 'None')
 
     def __str__(self):
         return f'{self.name}'
