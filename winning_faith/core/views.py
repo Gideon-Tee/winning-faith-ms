@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Student, Classroom
+from .models import Student, Classroom, Teacher
 
 # Create your views here.
 
@@ -25,12 +25,19 @@ def index(request):
 
 @login_required(login_url='login')
 def display_students(request):
-
+    students = Student.objects.all().order_by('fname', 'lname')
     context = {
         'students': students
     }
     return render(request, 'student_info.html', context)
 
+@login_required
+def display_teachers(request):
+    teachers = Teacher.objects.all().order_by('fname', 'lname')
+    context = {
+        'teachers': teachers
+    }
+    return render(request, 'display_teachers.html', context)
 
 
 @login_required(login_url='login')
@@ -67,6 +74,10 @@ def add_new_class(request):
     else:
         return render(request, 'add_new_class.html')
 
+
+def add_teacher(request):
+
+    return render(request, 'add_teacher.html')
 
 
 @login_required(login_url='login')

@@ -10,5 +10,7 @@ urlpatterns = [
     path('students', views.display_students, name='students'),
     path('add_new_class', views.add_new_class, name='add_new_class'),
     path('classes', views.display_classes, name='classes'),
-    path('settings', views.settings, name='settings')
+    path('settings', views.settings, name='settings'),
+    path('teachers', views.display_teachers, name='teachers'),
+    path('add_teacher', views.add_teacher, name='add_teacher')
 ]
