@@ -31,7 +31,7 @@ def display_students(request):
     }
     return render(request, 'student_info.html', context)
 
-@login_required
+@login_required(login_url='login')
 def display_teachers(request):
     teachers = Teacher.objects.all().order_by('fname', 'lname')
     context = {
@@ -74,10 +74,32 @@ def add_new_class(request):
     else:
         return render(request, 'add_new_class.html')
 
-
+@login_required(login_url='login')
 def add_teacher(request):
+    classrooms = Classroom.objects.all()
+    context = {
+        'classrooms': classrooms
+    }
+    if request.method == 'POST':
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        other_names = request.POST['other_names']
+        assigned_class = request.POST['assigned_class']
 
-    return render(request, 'add_teacher.html')
+        classroom = Classroom.objects.get(name = assigned_class)
+
+        new_teacher = Teacher.objects.create(
+            fname = fname,
+            lname = lname,
+            other_names = other_names,
+            assigned_class = classroom
+        )
+        new_teacher.save()
+        messages.info(request, 'new teacher added successfully')
+        return redirect('teachers')
+    
+    else:
+        return render(request, 'add_teacher.html', context)
 
 
 @login_required(login_url='login')

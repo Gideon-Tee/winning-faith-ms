@@ -1,10 +1,36 @@
-{% extends 'index.html' %}
+{% extends 'enroll.html' %}
 
 {% block content %}
-<div class="m-5 text-center">
-    <h5 class="display-6 alert-danger alert">Page under development</h5>
+<div class="container-fluid row home mt-3 pb-4 ">
+    <h1 class="display-6 mt-2 mb-3 text-center blue-text">New Teacher</h1><hr>
+    <div class="container row ">
+        <div class="container-fluid">
+            <form class="row form" action="add_teacher" method="POST">
+                {% csrf_token %}
+                <div class="container">
+                    <label for="fname" class="form-label">First name <span class="text-danger">*</span></label>
+                    <input type="text" name="fname" required class="form-control">
+                    <label for="lname" class="form-label">Last name <span class="text-danger">*</span></label>
+                    <input type="text" name="lname" required class="form-control">
+                    <label for="other_names" class="form-label">Other names</label>
+                    <input type="text" name="other_names" class="form-control">
+                    <label for="assigned_class" class="form-label">Assigned Classroom <span class="text-danger">*</span></label>
+                    <select name="assigned_class" required id="assigned_class" class="form-select">
+                        <option selected>Select</option>
+                        {% for classroom in classrooms %}
+                        <option value="{{classroom.name}}">{{classroom.name}}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="container mt-4 pb-4 justify-content-center">
+                        <div class="row mb-5 mt-3">
+                            <input type="submit" value="Add" class="btn btn-primary mt-2 mb-5">
 
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-    
 {% endblock content %}
     

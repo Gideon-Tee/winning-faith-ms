@@ -25,6 +25,11 @@
     </div>
     {% endblock db_table_header %}
         
+    
+    {% for message in messages %}
+        <p class="text-success">{{message}}</p>
+    {% endfor %}
+        
     <div class="container bg-white rounded pt-3 pb-4">
         <div class="" style="height: 450px; overflow-y: auto;">
             
