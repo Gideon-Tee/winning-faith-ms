@@ -4,6 +4,9 @@
 <div class="container-fluid row home mt-3 pb-4 ">
     <h1 class="display-6 mt-2 mb-3 text-center blue-text">New Teacher</h1><hr>
     <div class="container row ">
+        {% for message in messages %}
+            <h5 class="text-danger">{{message}}</h5>
+        {% endfor %}
         <div class="container-fluid">
             <form class="row form" action="add_teacher" method="POST">
                 {% csrf_token %}

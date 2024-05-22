@@ -80,27 +80,31 @@ def add_teacher(request):
     context = {
         'classrooms': classrooms
     }
-    if request.method == 'POST':
-        fname = request.POST['fname']
-        lname = request.POST['lname']
-        other_names = request.POST['other_names']
-        assigned_class = request.POST['assigned_class']
+    try:
+        if request.method == 'POST':
+            fname = request.POST['fname']
+            lname = request.POST['lname']
+            other_names = request.POST['other_names']
+            assigned_class = request.POST['assigned_class']
 
-        classroom = Classroom.objects.get(name = assigned_class)
+            classroom = Classroom.objects.get(name = assigned_class)
 
-        new_teacher = Teacher.objects.create(
-            fname = fname,
-            lname = lname,
-            other_names = other_names,
-            assigned_class = classroom
-        )
-        new_teacher.save()
-        messages.info(request, 'new teacher added successfully')
-        return redirect('teachers')
-    
-    else:
-        return render(request, 'add_teacher.html', context)
-
+            new_teacher = Teacher.objects.create(
+                fname = fname,
+                lname = lname,
+                other_names = other_names,
+                assigned_class = classroom
+            )
+            new_teacher.save()
+            messages.info(request, f'new teacher, {fname} {lname}, added successfully')
+            return redirect('teachers')
+        
+        else:
+            return render(request, 'add_teacher.html', context)
+        
+    except Classroom.DoesNotExist:
+        messages.info(request, 'Select the appropriate classroom')
+        return redirect('add_teacher')
 
 @login_required(login_url='login')
 def enroll(request):
