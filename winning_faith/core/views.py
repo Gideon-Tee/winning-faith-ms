@@ -23,6 +23,14 @@ def index(request):
 
 
 @login_required(login_url='login')
+def student_fees(request):
+    classrooms = Classroom.objects.all()
+    context = {
+        'classrooms': classrooms
+    }
+    return render(request, 'student_fees.html', context)
+
+@login_required(login_url='login')
 def finance(request):
     Fee.crech = 500.00
     Fee.lower_primary = 540.00
