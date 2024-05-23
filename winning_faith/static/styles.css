@@ -10,6 +10,10 @@
     background-color: #0c3675;
 }
 
+.text-opacity-50 {
+    opacity: 0.3;
+}
+
 .panel-div-item {
     background-color: #c5dafa;
 }

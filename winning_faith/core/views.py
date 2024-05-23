@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Student, Classroom, Teacher
+from .models import Student, Classroom, Teacher, Fee
 
 # Create your views here.
 
@@ -22,6 +22,26 @@ def index(request):
     return render(request, 'index.html', context)
 
 
+@login_required(login_url='login')
+def finance(request):
+    Fee.crech = 500.00
+    Fee.lower_primary = 540.00
+    Fee.upper_primary = 650.00
+    Fee.jhs = 750.00
+
+    students = Student.objects.all()
+    fees = [Fee.crech, Fee.lower_primary, Fee.upper_primary, Fee.jhs]
+
+    context = {
+        'fees': fees,
+        'students': students,
+        'fee_crech': Fee.crech,
+        'fee_lower_primary': Fee.lower_primary,
+        'fee_upper_primary': Fee.upper_primary,
+        'fee_jhs': Fee.jhs
+    }
+
+    return render(request, 'finance.html', context)
 
 @login_required(login_url='login')
 def display_students(request):

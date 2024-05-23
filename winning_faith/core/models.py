@@ -35,3 +35,10 @@ class Teacher(models.Model):
 
     def __str__(self):
         return f'{self.fname} {self.lname}'
+
+
+class Fee:
+    crech: float
+    lower_primary: float
+    upper_primary: float
+    jhs: float
