@@ -67,7 +67,7 @@
                       </div>
 
                 </div>
-                <div class="col-lg-2"></div>
+                <div class="col-lg-2 mt-2" id="dateDiv"></div>
                 <div class="col-lg-2" style="float: inline-end;">
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle blue-text" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
@@ -206,5 +206,12 @@
                 
         </div>
     </div>
+    <script>
+        const date = new Date();
+        const dateString = date.toISOString().split('T')[0];
+        const dayOfWeek = date.toLocaleDateString('en-US', {weekday: "short"})
+        // document.getElementById('dateDiv').style.marginTop = 3;
+        document.getElementById('dateDiv').innerHTML = `${dayOfWeek}, ${dateString}`;
+    </script>
 </body>
 </html>
