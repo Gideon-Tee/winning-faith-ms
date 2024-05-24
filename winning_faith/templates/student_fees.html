@@ -5,18 +5,18 @@
 <div class="container-fluid row home w-100 mt-3 pb-0 h-100">
     <div class="container h-100">
         <div class="row mt-3">
-            <h3 class="display-6 text-center fw-bold blue-text">Fee Payment Status</h3><hr>
+            <h3 id="header" class="display-6 text-center fw-bold blue-text">Fee Payment Status</h3><hr>
             <div class="col col-lg-3 shadow">
                 <form action="student_fees" method="POST" class="form">
-                    <label for="display_radio" class="form-label d-inline">Filter By</label><hr>
+                    Filter By<hr>
                     <div class="form-check my-3">
-                        <input class="form-check-input" type="radio" name="displayBy" id="fullyPaid">
+                        <input class="form-check-input" type="radio" name="displayBy" id="fullyPaid" value=" -- Fully paid">
                         <label class="form-check-label" for="fullyPaid">
                           Fully paid
                         </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="displayBy" id="owingFees" checked>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="displayBy" id="owingFees" checked value=" -- Owing fees">
                         <label class="form-check-label" for="owingFees">
                           Owing fees
                         </label>
@@ -36,7 +36,8 @@
             </div>
             <div class="col col-lg-9">
                 <div class="col mb-4 shadow pt-2 rounded px-1" style="background-color: #3a64a2;">
-                    <h5 class="blue-text fw-bold" style="opacity: 0.8;">Required fees</h5>
+                    <h5 id="displayClass"  class="d-inline fw-bold text-light" style="opacity: 0.8;">All Students</h5>
+                    <span><h5 id="displayFilter" class="d-inline text-light"> -- Owing fees</h5></span><hr>
                     <div class="w-100 text-light" style="overflow-x: auto;">
                         <table class="table text-white fw-light">
                             <tr>
@@ -63,4 +64,30 @@
     </div>
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('#class_select').onchange = function() {
+            document.querySelector('#displayClass').textContent = this.value;
+        };
+
+        function updateDisplay() {
+            const radios = document.getElementsByName('displayBy')
+            let view = document.querySelector('#displayFilter')
+
+            for (radio of radios) {
+                if (radio.checked) {
+                    view.textContent = radio.value
+                    break;
+                }
+            }
+        }
+
+        const radios = document.getElementsByName('displayBy')
+        for (radio of radios) {
+            radio.addEventListener('change', updateDisplay);
+
+        }
+
+    });
+</script>
 {% endblock %}
