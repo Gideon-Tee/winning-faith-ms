@@ -5,10 +5,10 @@ from datetime import datetime
 
 
 fees = {
-    'crech': 500,
-    'lower_primary': 650,
-    'upper_primary': 800,
-    'jhs': 1000
+    'crech': 500.0,
+    'lower_primary': 650.0,
+    'upper_primary': 800.0,
+    'jhs': 1000.0
 }
 
 class Student(models.Model):
@@ -17,21 +17,30 @@ class Student(models.Model):
     lname = models.CharField(max_length=25)
     other_names = models.CharField(max_length=100, blank=True)
     fees_paid = models.FloatField()
+    fees_rem = models.FloatField(default=0.0)
+    is_owing = models.BooleanField(default=False)
     date_enrolled = models.DateField(default=datetime.now)
     classroom = models.CharField(max_length=25)
     category = models.CharField(max_length=25)
-    is_owing = models.BooleanField(default=False)
 
+    def calcRemainingFees(self):
+        fee_required = fees.get(self.category, 0.0)
+        fees_remaining = fee_required - self.fees_paid
+        print(f"Calculating remaining fees: fee_required={fee_required}, fees_paid={self.fees_paid}, remaining_fees={fees_remaining}")
+
+        return fees_remaining 
+    
     def isOwingFees(self):
-        fee_required = 0.0
-        for fee in fees:
-            if self.category == fee:
-                fee_required = fees[fee]
-                return float(self.fees_paid) < fee_required
+        # fee_required = 0.0
+        fee_required = fees.get(self.category, 0.0)
+        return self.fees_paid < fee_required
 
     def save(self, *args, **kwargs):
         self.is_owing = self.isOwingFees()
+        self.fees_rem = self.calcRemainingFees()
+        print(f'Before saving, fees remaining is {self.fees_rem}')
         super().save(*args, **kwargs)
+        print(f'After saving, fees remaining is {self.fees_rem}')
 
     def __str__(self):
         return f'{self.fname} {self.lname}'
