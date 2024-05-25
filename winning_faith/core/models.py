@@ -3,6 +3,14 @@ import uuid
 from datetime import datetime
 # Create your models here.
 
+
+fees = {
+    'crech': 500,
+    'lower_primary': 650,
+    'upper_primary': 800,
+    'jhs': 1000
+}
+
 class Student(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     fname = models.CharField(max_length=25)
@@ -12,6 +20,18 @@ class Student(models.Model):
     date_enrolled = models.DateField(default=datetime.now)
     classroom = models.CharField(max_length=25)
     category = models.CharField(max_length=25)
+    is_owing = models.BooleanField(default=False)
+
+    def isOwingFees(self):
+        fee_required = 0.0
+        for fee in fees:
+            if self.category == fee:
+                fee_required = fees[fee]
+                return float(self.fees_paid) < fee_required
+
+    def save(self, *args, **kwargs):
+        self.is_owing = self.isOwingFees()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.fname} {self.lname}'
