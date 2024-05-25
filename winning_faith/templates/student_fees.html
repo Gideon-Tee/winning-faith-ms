@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block content %}
-<div class="container-fluid row home w-100 mt-3 pb-0 h-100">
+<div class="container-fluid row home w-100 mt-3 pb-3 ">
     <div class="container h-100">
-        <div class="row mt-3">
+        <div class="row mt-3 h-100">
             <h3 id="header" class="display-6 text-center fw-bold blue-text">Fee Payment Status</h3><hr>
-            <div class="col col-lg-3 shadow">
+            <div class="col col-lg-3 shadow" style="height: 20rem;">
                 <form action="student_fees" method="POST" class="form">
                     Filter By<hr>
                     <div class="form-check my-3">
@@ -21,7 +21,7 @@
                           Owing fees
                         </label>
                     </div>
-                    <div class="mt-4">
+                    <div class="mt-4 pb-4">
                         <p>For</p>
                         <select name="class_select" id="class_select" class="form-select">
                             <option value="All Students" selected>All Students</option>
@@ -35,27 +35,31 @@
                 </form>
             </div>
             <div class="col col-lg-9">
-                <div class="col mb-4 shadow pt-2 rounded px-1" style="background-color: #3a64a2;">
+                <div class="col shadow pt-2 rounded px-1 pb-4" style="background-color: #3a64a2; max-height: 34rem; overflow-y: auto; margin-bottom: 18px;">
                     <h5 id="displayClass"  class="d-inline fw-bold text-light" style="opacity: 0.8;">All Students</h5>
                     <span><h5 id="displayFilter" class="d-inline text-light"> -- Owing fees</h5></span><hr>
                     <div class="w-100 text-light" style="overflow-x: auto;">
                         <table class="table text-white fw-light">
                             <tr>
-                                <td>Crech</td>
-                                <td>{{fee_crech}}</td>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Other Names</th>
+                                <th>Amount Paid</th>
+                                <th>Amount Remaining</th>
                             </tr>
-                            <tr>
-                                <td>Lower Primary</td>
-                                <td>{{fee_lower_primary}}</td>
-                            </tr>
-                            <tr>
-                                <td>Upper Primary</td>
-                                <td>{{fee_upper_primary}}</td>
-                            </tr>
-                            <tr>
-                                <td>J H S</td>
-                                <td>{{fee_jhs}}</td>
-                            </tr>
+
+                            
+                            {% for student in students %}
+                                <tr>
+                                    <td>{{student.fname}}</td>
+                                    <td>{{student.lname}}</td>
+                                    <td>{{student.other_names}}</td>
+                                    <td>{{student.fees_paid}}</td>
+                                    <td>{{student.fees_rem}}</td>
+                                </tr>
+                            {% endfor %}
+                                
+                            
                         </table>
                     </div>
                 </div>
