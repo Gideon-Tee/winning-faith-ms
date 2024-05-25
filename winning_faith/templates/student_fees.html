@@ -44,16 +44,18 @@
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Other Names</th>
+                                <th>Class</th>
                                 <th>Amount Paid</th>
                                 <th>Amount Remaining</th>
                             </tr>
 
                             
-                            {% for student in students %}
+                            {% for student in students_owing %}
                                 <tr>
                                     <td>{{student.fname}}</td>
                                     <td>{{student.lname}}</td>
                                     <td>{{student.other_names}}</td>
+                                    <td>{{student.classroom}}</td>
                                     <td>{{student.fees_paid}}</td>
                                     <td>{{student.fees_rem}}</td>
                                 </tr>
