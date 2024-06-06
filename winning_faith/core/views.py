@@ -26,7 +26,7 @@ def index(request):
 def student_fees(request):
     classrooms = Classroom.objects.all()
     students = Student.objects.all()
-    students_owing_fees = Student.objects.filter(is_owing=True).order_by('fname', 'lname')
+    students_owing_fees = Student.objects.filter(is_owing=True).order_by('lname', 'fname')
     # for student in students_owing_fees:
     #     print(student.fees_rem)
     context = {
@@ -61,7 +61,7 @@ def finance(request):
 
 @login_required(login_url='login')
 def display_students(request):
-    students = Student.objects.all().order_by('fname', 'lname')
+    students = Student.objects.all().order_by('lname', 'fname')
     context = {
         'students': students
     }

@@ -41,8 +41,8 @@
                     <div class="w-100 text-light" style="overflow-x: auto;">
                         <table class="table text-white fw-light">
                             <tr>
-                                <th>First Name</th>
                                 <th>Last Name</th>
+                                <th>First Name</th>
                                 <th>Other Names</th>
                                 <th>Class</th>
                                 <th>Amount Paid</th>
@@ -52,8 +52,8 @@
                             
                             {% for student in students_owing %}
                                 <tr>
-                                    <td>{{student.fname}}</td>
                                     <td>{{student.lname}}</td>
+                                    <td>{{student.fname}}</td>
                                     <td>{{student.other_names}}</td>
                                     <td>{{student.classroom}}</td>
                                     <td>{{student.fees_paid}}</td>

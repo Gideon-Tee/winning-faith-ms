@@ -31,9 +31,9 @@
             {% block db_table %}
             <table class="table table-striped">
                 <tr>
-                    <th>First Name</th>
-                    <th>Middle Name(s)</th>
                     <th>Last Name</th>
+                    <th>First Name(s)</th>
+                    <th>Other Name(s)</th>
                     <th>Class</th>
                     <th>Date Admitted</th>
                     <th>Fees Paid</th>
@@ -41,9 +41,9 @@
                 </tr>
                 {% for student in students %}
                 <tr>
+                    <td>{{student.lname}}</td>
                     <td>{{student.fname}}</td>
                     <td>{{student.other_names}}</td>
-                    <td>{{student.lname}}</td>
                     <td>{{student.classroom}}</td>
                     <td>{{student.date_enrolled}}</td>
                     <td>{{student.fees_paid}}</td>
