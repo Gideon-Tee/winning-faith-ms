@@ -88,9 +88,26 @@
             }
         }
 
+
         const radios = document.getElementsByName('displayBy')
         for (radio of radios) {
-            radio.addEventListener('change', updateDisplay);
+            radio.addEventListener('change', function() {
+                // xhr = new XMLHttpRequest();
+                // xhr.open('GET', 'http://127.0.0.1/students', true);
+                // resp = xhr.responseText;
+                // xhr.onload = function() {
+                //     if (this.status == 200) {
+                //         console.log(resp);
+
+                //     }
+                // }
+                // xhr.onerror = function() {
+                //     console.log('an error occured!');
+                // }
+                // xhr.send();
+                updateDisplay();
+
+            });
 
         }
 

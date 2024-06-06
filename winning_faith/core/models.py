@@ -25,7 +25,7 @@ class Student(models.Model):
 
     def calcRemainingFees(self):
         fee_required = fees.get(self.category, 0.0)
-        fees_remaining = fee_required - self.fees_paid
+        fees_remaining = fee_required - float(self.fees_paid)
         print(f"Calculating remaining fees: fee_required={fee_required}, fees_paid={self.fees_paid}, remaining_fees={fees_remaining}")
 
         return fees_remaining 
@@ -33,7 +33,7 @@ class Student(models.Model):
     def isOwingFees(self):
         # fee_required = 0.0
         fee_required = fees.get(self.category, 0.0)
-        return self.fees_paid < fee_required
+        return float(self.fees_paid) < float(fee_required)
 
     def save(self, *args, **kwargs):
         self.is_owing = self.isOwingFees()
