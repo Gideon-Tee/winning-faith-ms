@@ -23,14 +23,14 @@ class Student(models.Model):
     classroom = models.CharField(max_length=25)
     category = models.CharField(max_length=25)
 
-    def calcRemainingFees(self):
+    def calcRemainingFees(self) -> float:
         fee_required = fees.get(self.category, 0.0)
         fees_remaining = fee_required - float(self.fees_paid)
         print(f"Calculating remaining fees: fee_required={fee_required}, fees_paid={self.fees_paid}, remaining_fees={fees_remaining}")
 
         return fees_remaining 
     
-    def isOwingFees(self):
+    def isOwingFees(self) -> bool:
         # fee_required = 0.0
         fee_required = fees.get(self.category, 0.0)
         return float(self.fees_paid) < float(fee_required)
