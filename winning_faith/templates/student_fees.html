@@ -27,7 +27,11 @@
                             <option value="All Students" selected>All Students</option>
                             
                             {% for class in classrooms %}
-                            <option value="{{class.name}}">{{class.name}}</option>
+                            <form action="" method="get">
+                                <option value="{{class.name}}" name="class_select">{{class.name}}</option>
+
+                            </form>
+
                             {% endfor %}
                                 
                         </select>

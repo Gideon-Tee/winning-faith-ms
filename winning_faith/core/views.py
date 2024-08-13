@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Student, Classroom, Teacher, Fee
+from django.db.models import Q
 
 # Create your views here.
 
@@ -61,7 +62,18 @@ def finance(request):
 
 @login_required(login_url='login')
 def display_students(request):
-    students = Student.objects.all().order_by('lname', 'fname')
+    try:
+        search = request.GET.get('search_student', '')
+        if search:
+            students = Student.objects.filter(
+                Q(fname__icontains=search) | Q(lname__icontains=search) | Q(other_names__icontains=search)
+            ).order_by('lname', 'fname')
+        else:
+            students = Student.objects.all().order_by('lname', 'fname')
+    except Exception as e:
+        print(f'error:: {e}')
+        messages.error(request, 'An error occurred')
+        return redirect('index')
     context = {
         'students': students
     }
