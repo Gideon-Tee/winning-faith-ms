@@ -1,12 +1,14 @@
 from django import forms
-from django.forms import ModelForm
-from .models import Student
+from .models import Student, Classroom
 
 
-class EnrollStudentForm(ModelForm):
+class EnrollStudentForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = [
-            'fname', 'lname', 'other_names' \
-            'fees_paid', 'date_enrolled', 'category'
-        ]
+        fields = '__all__'
+        exclude = ['full_name', 'fees_rem', 'is_owing', 'id']
+
+class ClassroomForm(forms.ModelForm):
+    class Meta:
+        model = Classroom
+        exclude = ['id', 'num_of_students']

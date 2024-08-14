@@ -13,7 +13,8 @@
                 
             <form class="row form justify-content-center w-100 shadow-sm mt-4" action="add_new_class" method="POST">
                 {% csrf_token %}
-                <div class="row">
+                {{form}}
+                <!-- <div class="row">
                     <div class="col-12 col-lg-6">
                         <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
                         <input type="text" required class="form-control" name="name">
@@ -39,7 +40,7 @@
                         <input type="date" required class="form-control" name="lname">
                     </div>
 
-                </div>
+                </div> -->
                
                 <div class="row w-100 mt-5 justify-content-center mb-5">
                     <input type="submit" class="col-auto btn btn-primary " value="Add Class">

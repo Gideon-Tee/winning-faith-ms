@@ -1,20 +1,20 @@
 {% load static %}
 
-<div class="row w-100 bg-white pt-3">
+<div class="row w-100 bg-white pt-1" style="height: 40px; margin-left: 10px;">
     <div class="col-lg-8">
         <form action="{% url 'students' %}" method="get" class="form">
-        <div class="input-group mb-1">
-            <span class="input-group-text">
-              <!-- Bootstrap Icon for Search -->
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 9.558a5.5 5.5 0 1 0-1.184 1.184l3.132 3.132a1 1 0 1 0 1.414-1.414l-3.132-3.132z"/>
-                <path fill-rule="evenodd" d="M10.5 6a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0zm-8 0a3.5 3.5 0 1 0 7 0 3.5 3.5 0 0 0-7 0z"/>
-              </svg>
-            </span>
-                
-                <input type="search" name="search_student" class="form-control" placeholder="search student by last name or first name .." aria-label="Search" aria-describedby="button-addon2">
+            <div class="input-group mb-1">
+                <span class="input-group-text">
+                <!-- Bootstrap Icon for Search -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 9.558a5.5 5.5 0 1 0-1.184 1.184l3.132 3.132a1 1 0 1 0 1.414-1.414l-3.132-3.132z"/>
+                    <path fill-rule="evenodd" d="M10.5 6a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0zm-8 0a3.5 3.5 0 1 0 7 0 3.5 3.5 0 0 0-7 0z"/>
+                </svg>
+                </span>
+                    
+                    <input type="search" name="search_student" class="form-control" placeholder="search student by name ..." aria-label="Search" aria-describedby="button-addon2">
+            </div>
         </form>
-        </div>
     
     </div>
     <!-- Date display field -->

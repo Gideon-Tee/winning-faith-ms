@@ -11,9 +11,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <div class="row" style="height: 100vh;">
+    <div class="row gx-0" >
         <!-- Left panel  -->
-        <div class="container-fluid col col-lg-3 pb-5" style="background-color: #0c3675; height: 40rem; overflow-y: auto;">
+        <div class="col col-lg-3 pb-4" style="background-color: #0c3675; height: 100vh; overflow-y: auto;">
             <div class="row w-100">
                 <div class="col-lg-5 logo">
                     <img src="{% static 'new-logo.png' %}" alt="" class="img-fluid" height="55">
@@ -52,128 +52,132 @@
 
         </div>
         <!-- Main content  -->
-        <div class="container-fluid col-lg-9 pt-2" style="height: 40rem; overflow-y: auto;">
+        <div class="col-lg-9 pt-2">
             <!-- top header content -->
             
             {% include 'navbar.html' %}
             
-            {% block content %}
-            <div class="container-fluid row home w-100 mt-3 pb-5">
-                <h4 class="blue-text mt-2 mb-3 display-6">Overview</h4>
-                <!-- card elements -->
-                <div class="col-6 col-lg-3">
-                    <div class="card shadow mb-3 bg-white">
-                        <div class="row g-0">
-                          <div class="col-md-4">
-                            <img src="{% static 'student.jpeg' %}" class="img-fluid rounded-start h-100" alt="...">
-                          </div>
-                          <div class="col-md-8 bg-white">
-                            <div class="card-body bg-white">
-                              <h5 class="text-muted m-0">Students</h5>
-                              <p class="card-text blue-text fw-bold">{{student_population}} </p>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3 h-auto">
-                    <div class="card shadow b-3">
-                        <div class="row g-0">
-                          <div class="col-md-4">
-                            <img src="{% static 'teacher2.png' %}" class="img-fluid rounded-start h-100" alt="...">
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body">
-                              <h5 class="text-muted m-0">Teachers</h5>
-                              <p class="card-text blue-text fw-bold">{{teacher_population}}</p>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3 ">
-                    <div class="card shadow mb-3">
-                        <div class="row g-0">
-                          <div class="col-md-4">
-                            <img src="{% static 'staff.jpeg' %}" class="img-fluid rounded-start h-100" >
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body">
-                              <h5 class="text-muted m-0">Other Staff</h5>
-                              <p class="card-text blue-text fw-bold">12</p>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <div class="card shadow mb-3">
-                        <div class="row g-0">
-                          <div class="col-md-4">
-                            <img src="{% static 'blank-profile-picture.png' %}" class="img-fluid rounded-start h-100" >
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body">
-                              <h5 class="text-muted m-0">Other Staff</h5>
-                              <p class="card-text blue-text fw-bold">12</p>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 bg-white mt-4 mb-3 rounded shadow">
-                    <div class="container mb-4">
-                        <h5 class="blue-text mt-3 mb-3">JHS</h5>
-                        <div class="scrollable-div">
-                            <table class="table table-striped">
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Class</th>
-                                    <th>Fees Paid</th>
-                                    <!-- <th>Fees Owing</th> -->
-                                </tr>
-                                
-                                {% for student in jhs_students %}
-                                <tr>
-                                    <td>{{student.fname}} {{student.lname}}</td>
-                                    <td>{{student.classroom}}</td>
-                                    <td>{{student.fees_paid}}</td>
-                                    <!-- <td></td> -->
-                                </tr>
-                                {% endfor %}
-                                    
-                                
-                            </table>
-                        </div>
-                    </div>
+            <div class="container w-100 mt-3" style="height: calc(100vh - 64px); overflow-y: auto; background-color: #c5dafa;">
 
-                </div>
-                <div class="col-lg-1"></div>
-                <div class="col-12 col-lg-5 bg-white mt-4 mb-3 rounded shadow pb-4">
-                    <div class="container mb-4">
-                        <h5 class="blue-text mt-3 mb-3">Recently admitted students</h5>
-                        <div class="scrollable-div">
-                            <table class="table table-striped">
-                                <tr>
-                                    <th>First name</th>
-                                    <th>Last name</th>
-                                    <th>Class</th>
-                                </tr>
-                                {% for student in students reversed %}
-                                    <tr>
-                                        <td>{{student.fname}}</td>
-                                        <td>{{student.lname}}</td>
-                                        <td>{{student.classroom}}</td>
-                                    </tr>
-                                {% endfor %}
-                                    
-                            </table>
+                {% block content %}
+                <div class="container row home w-100 mt-3 pb-3">
+                    <h4 class="blue-text mt-2 mb-3 display-6">Overview</h4>
+                    <!-- card elements -->
+                    <div class="col-6 col-lg-3">
+                        <div class="card shadow mb-3 bg-white">
+                            <div class="row g-0">
+                              <div class="col-md-4">
+                                <img src="{% static 'student.jpeg' %}" class="img-fluid rounded-start h-100" alt="...">
+                              </div>
+                              <div class="col-md-8 bg-white">
+                                <div class="card-body bg-white">
+                                  <h5 class="text-muted m-0">Students</h5>
+                                  <p class="card-text blue-text fw-bold">{{student_population}} </p>
+                                </div>
+                              </div>
+                            </div>
                         </div>
-                        
+                    </div>
+                    <div class="col-6 col-lg-3 h-auto">
+                        <div class="card shadow b-3">
+                            <div class="row g-0">
+                              <div class="col-md-4">
+                                <img src="{% static 'teacher2.png' %}" class="img-fluid rounded-start h-100" alt="...">
+                              </div>
+                              <div class="col-md-8">
+                                <div class="card-body">
+                                  <h5 class="text-muted m-0">Teachers</h5>
+                                  <p class="card-text blue-text fw-bold">{{teacher_population}}</p>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3 ">
+                        <div class="card shadow mb-3">
+                            <div class="row g-0">
+                              <div class="col-md-4">
+                                <img src="{% static 'staff.jpeg' %}" class="img-fluid rounded-start h-100" >
+                              </div>
+                              <div class="col-md-8">
+                                <div class="card-body">
+                                  <h5 class="text-muted m-0">Other Staff</h5>
+                                  <p class="card-text blue-text fw-bold">12</p>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3">
+                        <div class="card shadow mb-3">
+                            <div class="row g-0">
+                              <div class="col-md-4">
+                                <img src="{% static 'blank-profile-picture.png' %}" class="img-fluid rounded-start h-100" >
+                              </div>
+                              <div class="col-md-8">
+                                <div class="card-body">
+                                  <h5 class="text-muted m-0">Other Staff</h5>
+                                  <p class="card-text blue-text fw-bold">12</p>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 bg-white mt-4 mb-3 rounded shadow">
+                        <div class="container mb-4">
+                            <h5 class="blue-text mt-3 mb-3">JHS</h5>
+                            <div class="scrollable-div">
+                                <table class="table table-striped">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Class</th>
+                                        <th>Fees Paid</th>
+                                        <!-- <th>Fees Owing</th> -->
+                                    </tr>
+                                    
+                                    {% for student in jhs_students %}
+                                    <tr>
+                                        <td>{{student.fname}} {{student.lname}}</td>
+                                        <td>{{student.classroom}}</td>
+                                        <td>{{student.fees_paid}}</td>
+                                        <!-- <td></td> -->
+                                    </tr>
+                                    {% endfor %}
+                                        
+                                    
+                                </table>
+                            </div>
+                        </div>
+    
+                    </div>
+                    <div class="col-lg-1"></div>
+                    <div class="col-12 col-lg-5 bg-white mt-4 mb-3 rounded shadow pb-4">
+                        <div class="container mb-4">
+                            <h5 class="blue-text mt-3 mb-3">Recently admitted students</h5>
+                            <div class="scrollable-div">
+                                <table class="table table-striped">
+                                    <tr>
+                                        <th>First name</th>
+                                        <th>Last name</th>
+                                        <th>Class</th>
+                                    </tr>
+                                    {% for student in students reversed %}
+                                        <tr>
+                                            <td>{{student.fname}}</td>
+                                            <td>{{student.lname}}</td>
+                                            <td>{{student.classroom}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                        
+                                </table>
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
+                {% endblock content %}
             </div>
-            {% endblock content %}
+            
                 
                 
         </div>

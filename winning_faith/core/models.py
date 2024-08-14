@@ -12,10 +12,10 @@ fees = {
 }
 
 category_choices = (
-    ('crech', 'crech'),
-    ('lower_primary', 'lower_primary'),
-    ('upper_primary', 'upper_primary'),
-    ('jhs', 'jhs')
+    ('crech', 'Crech / Kindergarten'),
+    ('lower_primary', 'Lower primary'),
+    ('upper_primary', 'Upper primary'),
+    ('jhs', 'JHS')
 )
 
 
@@ -33,8 +33,7 @@ class Student(models.Model):
     fees_rem = models.FloatField(default=0.0)
     is_owing = models.BooleanField(default=False)
     date_enrolled = models.DateField(default=datetime.now)
-    classroom = models.ForeignKey('Classroom', on_delete=models.PROTECT)
-    category = models.CharField(max_length=25, choices=category_choices)
+    classroom = models.ForeignKey('Classroom', to_field='name', on_delete=models.PROTECT)
 
     def calcRemainingFees(self) -> float:
         fee_required = fees.get(self.category, 0.0)
@@ -62,9 +61,10 @@ class Student(models.Model):
     
 class Classroom(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    name = models.CharField(max_length=25)
+    name = models.CharField(max_length=25, unique=True)
     num_of_students = models.IntegerField(blank = True, default=0)
-    category = models.CharField(max_length=30, default = 'None')
+    category = models.CharField(max_length=25, choices=category_choices)
+    
 
     def __str__(self):
         return f'{self.name}'

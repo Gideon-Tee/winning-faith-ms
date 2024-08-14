@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Student, Classroom, Teacher, Fee
+from .forms import EnrollStudentForm, ClassroomForm
 from django.db.models import Q
 
 # Create your views here.
@@ -13,7 +14,7 @@ from django.db.models import Q
 def index(request):
     students = Student.objects.all()
     teachers = Teacher.objects.all()
-    jhs_students = Student.objects.filter(category='jhs')
+    jhs_students = Student.objects.filter(classroom='jhs')
     # for student in jhs1_students:
     #     student.fees_paid -= 700.00 
     context = {
@@ -110,6 +111,9 @@ def display_classes(request):
 
 @login_required(login_url='login')
 def add_new_class(request):
+    form = ClassroomForm()
+
+
     if request.method == 'POST':
         name = request.POST['name']
         category = request.POST['category']
@@ -123,8 +127,8 @@ def add_new_class(request):
         new_class.save()
         messages.info(request, 'Class created successfully')
         return redirect('classes')
-    else:
-        return render(request, 'add_new_class.html')
+    
+    return render(request, 'add_new_class.html', {'form': form})
 
 @login_required(login_url='login')
 def add_teacher(request):
@@ -161,8 +165,8 @@ def add_teacher(request):
 @login_required(login_url='login')
 def enroll(request):
     classes = Classroom.objects.all()
-    context = {'classes': classes}
-
+    form = EnrollStudentForm()
+    
     if request.method == 'POST':
         fname = request.POST['fname']
         lname = request.POST['lname']
@@ -183,8 +187,11 @@ def enroll(request):
         )
         new_student.save()
         return redirect('index')
-    else:
-        return render(request, 'enroll.html', context)
+    
+    context = {'classes': classes, 'form': form}
+
+    
+    return render(request, 'enroll.html', context)
 
 
 def settings(request):
