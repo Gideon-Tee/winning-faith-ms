@@ -39,6 +39,8 @@
                     <th>Fees Paid</th>
     
                 </tr>
+                
+                {% if students %}
                 {% for student in students %}
                 <tr>
                     <td>{{student.lname}}</td>
@@ -51,8 +53,14 @@
 
                 {% endfor %}
 
-            </table>
                 
+                {% else %}
+                <h5 class="text-danger text-center fw-light">query did not match any student</h5>
+                    
+                {% endif %}
+                
+            </table>
+            
             {% endblock db_table %}
                 
         </div>

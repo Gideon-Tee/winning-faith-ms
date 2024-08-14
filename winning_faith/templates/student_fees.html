@@ -24,14 +24,13 @@
                     <div class="mt-4 pb-4">
                         <p>For</p>
                         <select name="class_select" id="class_select" class="form-select">
+
                             <option value="All Students" selected>All Students</option>
                             
                             {% for class in classrooms %}
-                            <form action="" method="get">
-                                <option value="{{class.name}}" name="class_select">{{class.name}}</option>
-
-                            </form>
-
+                            
+                            <option value="{{class.name}}" name="class_select">{{class.name}}</option>
+                            
                             {% endfor %}
                                 
                         </select>

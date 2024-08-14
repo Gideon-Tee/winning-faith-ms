@@ -11,17 +11,30 @@ fees = {
     'jhs': 1000.0
 }
 
+category_choices = (
+    ('crech', 'crech'),
+    ('lower_primary', 'lower_primary'),
+    ('upper_primary', 'upper_primary'),
+    ('jhs', 'jhs')
+)
+
+
+
 class Student(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     fname = models.CharField(max_length=25)
     lname = models.CharField(max_length=25)
     other_names = models.CharField(max_length=100, blank=True)
+    full_name = models.CharField(max_length = 100, editable=False)
+    guardian_full_name = models.CharField(max_length=255)
+    guardian_phone_number = models.IntegerField()
+    guardian_relation = models.CharField(max_length=25)
     fees_paid = models.FloatField()
     fees_rem = models.FloatField(default=0.0)
     is_owing = models.BooleanField(default=False)
     date_enrolled = models.DateField(default=datetime.now)
-    classroom = models.CharField(max_length=25)
-    category = models.CharField(max_length=25)
+    classroom = models.ForeignKey('Classroom', on_delete=models.PROTECT)
+    category = models.CharField(max_length=25, choices=category_choices)
 
     def calcRemainingFees(self) -> float:
         fee_required = fees.get(self.category, 0.0)
@@ -34,13 +47,15 @@ class Student(models.Model):
         # fee_required = 0.0
         fee_required = fees.get(self.category, 0.0)
         return float(self.fees_paid) < float(fee_required)
+    
+    def getFullName(self) -> str:
+        return f'{self.lname} {self.fname} {self.other_names}'
 
     def save(self, *args, **kwargs):
         self.is_owing = self.isOwingFees()
         self.fees_rem = self.calcRemainingFees()
-        print(f'Before saving, fees remaining is {self.fees_rem}')
+        self.full_name = self.getFullName()
         super().save(*args, **kwargs)
-        print(f'After saving, fees remaining is {self.fees_rem}')
 
     def __str__(self):
         return f'{self.fname} {self.lname}'
@@ -49,7 +64,6 @@ class Classroom(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=25)
     num_of_students = models.IntegerField(blank = True, default=0)
-    class_teacher = models.CharField(max_length=100)
     category = models.CharField(max_length=30, default = 'None')
 
     def __str__(self):
@@ -60,7 +74,17 @@ class Teacher(models.Model):
     fname = models.CharField(max_length=25)
     lname = models.CharField(max_length=25)
     other_names = models.CharField(max_length=100, blank=True)
-    assigned_class = models.ForeignKey(Classroom, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=100, editable=False)
+    assigned_class = models.ForeignKey(Classroom, on_delete=models.SET_NULL, related_name='class_teacher', null=True)
+
+
+    def getFullName(self):
+        return f'{self.lname} {self.fname} {self.other_names}'
+
+    def save(self, *args, **kwargs):
+        self.full_name = self.getFullName()
+        super().save(*args, **kwargs)
+
 
     def __str__(self):
         return f'{self.fname} {self.lname}'

@@ -12,13 +12,15 @@ from django.db.models import Q
 @login_required(login_url='login')
 def index(request):
     students = Student.objects.all()
+    teachers = Teacher.objects.all()
     jhs_students = Student.objects.filter(category='jhs')
     # for student in jhs1_students:
     #     student.fees_paid -= 700.00 
     context = {
         'students': students,
         'jhs_students': jhs_students,
-        'student_population': len(students)
+        'student_population': len(students),
+        'teacher_population': len(teachers)
     }
     return render(request, 'index.html', context)
 
@@ -65,8 +67,9 @@ def display_students(request):
     try:
         search = request.GET.get('search_student', '')
         if search:
+            
             students = Student.objects.filter(
-                Q(fname__icontains=search) | Q(lname__icontains=search) | Q(other_names__icontains=search)
+                Q(full_name__icontains=search)
             ).order_by('lname', 'fname')
         else:
             students = Student.objects.all().order_by('lname', 'fname')
