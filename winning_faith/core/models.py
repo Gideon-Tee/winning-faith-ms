@@ -21,7 +21,6 @@ category_choices = (
 
 
 class Student(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     fname = models.CharField(max_length=25)
     lname = models.CharField(max_length=25)
     other_names = models.CharField(max_length=100, blank=True)
@@ -60,22 +59,21 @@ class Student(models.Model):
         return f'{self.fname} {self.lname}'
     
 class Classroom(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=25, unique=True)
     num_of_students = models.IntegerField(blank = True, default=0)
     category = models.CharField(max_length=25, choices=category_choices)
+    # class_teacher = models.ForeignKey('Teacher', on_delete=models.SET_NULL)
     
 
     def __str__(self):
         return f'{self.name}'
     
 class Teacher(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     fname = models.CharField(max_length=25)
     lname = models.CharField(max_length=25)
     other_names = models.CharField(max_length=100, blank=True)
     full_name = models.CharField(max_length=100, editable=False)
-    assigned_class = models.ForeignKey(Classroom, on_delete=models.SET_NULL, related_name='class_teacher', null=True)
+    assigned_class = models.OneToOneField(Classroom, on_delete=models.SET_NULL, related_name='class_teacher', to_field='name', null=True, blank=True)
 
 
     def getFullName(self):

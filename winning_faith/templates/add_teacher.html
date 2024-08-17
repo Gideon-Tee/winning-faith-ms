@@ -10,7 +10,8 @@
         <div class="container-fluid">
             <form class="row form" action="add_teacher" method="POST">
                 {% csrf_token %}
-                <div class="container">
+                {{form}}
+                <!-- <div class="container">
                     <label for="fname" class="form-label">First name <span class="text-danger">*</span></label>
                     <input type="text" name="fname" required class="form-control">
                     <label for="lname" class="form-label">Last name <span class="text-danger">*</span></label>
@@ -23,14 +24,14 @@
                         {% for classroom in classrooms %}
                         <option value="{{classroom.name}}">{{classroom.name}}</option>
                         {% endfor %}
-                    </select>
+                    </select> -->
                     <div class="container mt-4 pb-4 justify-content-center">
                         <div class="row mb-5 mt-3">
                             <input type="submit" value="Add" class="btn btn-primary mt-2 mb-5">
 
                         </div>
                     </div>
-                </div>
+                <!-- </div>  -->
             </form>
         </div>
     </div>

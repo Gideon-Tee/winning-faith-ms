@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Student, Classroom, Teacher, Fee
-from .forms import EnrollStudentForm, ClassroomForm
+from .forms import EnrollStudentForm, ClassroomForm, TeacherForm
 from django.db.models import Q
 
 # Create your views here.
@@ -115,52 +115,34 @@ def add_new_class(request):
 
 
     if request.method == 'POST':
-        name = request.POST['name']
-        category = request.POST['category']
-        class_teacher = request.POST['class_teacher']
-
-        new_class = Classroom.objects.create(
-            name = name,
-            class_teacher = class_teacher,
-            category = category
-        )
-        new_class.save()
-        messages.info(request, 'Class created successfully')
-        return redirect('classes')
+        form = ClassroomForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.info(request, 'Class created successfully')
+            return redirect('classes')
+        
+            
     
     return render(request, 'add_new_class.html', {'form': form})
 
 @login_required(login_url='login')
 def add_teacher(request):
+    form = TeacherForm()
     classrooms = Classroom.objects.all()
-    context = {
-        'classrooms': classrooms
-    }
-    try:
-        if request.method == 'POST':
-            fname = request.POST['fname']
-            lname = request.POST['lname']
-            other_names = request.POST['other_names']
-            assigned_class = request.POST['assigned_class']
 
-            classroom = Classroom.objects.get(name = assigned_class)
-
-            new_teacher = Teacher.objects.create(
-                fname = fname,
-                lname = lname,
-                other_names = other_names,
-                assigned_class = classroom
-            )
-            new_teacher.save()
-            messages.info(request, f'new teacher, {fname} {lname}, added successfully')
+    if request.method == 'POST':
+        form = TeacherForm(request.POST)
+        if form.is_valid():
+            form.save()
             return redirect('teachers')
-        
-        else:
-            return render(request, 'add_teacher.html', context)
-        
-    except Classroom.DoesNotExist:
-        messages.info(request, 'Select the appropriate classroom')
-        return redirect('add_teacher')
+
+    context = {
+        'classrooms': classrooms,
+        'form': form
+    }
+
+    return render(request, 'add_teacher.html', context)
+    
 
 @login_required(login_url='login')
 def enroll(request):

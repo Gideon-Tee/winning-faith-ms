@@ -26,7 +26,17 @@
     <tr>
         <a href=""><td>{{class.name}}</td></a>
         <td>{{class.num_of_students}}</td>
-        <td>{{class.class_teacher}}</td>
+        
+        {% if class.class_teacher %}
+            
+        <td>{{class.class_teacher.full_name}}</td>
+
+        {% else %}
+
+        <td>---</td>
+
+        {% endif %}
+            
     </tr>
 
     {% endfor %}
