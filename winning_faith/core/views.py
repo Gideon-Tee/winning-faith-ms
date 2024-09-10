@@ -14,6 +14,7 @@ from django.db.models import Q
 def index(request):
     students = Student.objects.all()
     teachers = Teacher.objects.all()
+    classrooms = Classroom.objects.all()
     jhs_students = Student.objects.filter(classroom='jhs')
     # for student in jhs1_students:
     #     student.fees_paid -= 700.00 
@@ -21,7 +22,8 @@ def index(request):
         'students': students,
         'jhs_students': jhs_students,
         'student_population': len(students),
-        'teacher_population': len(teachers)
+        'teacher_population': len(teachers),
+        'num_of_classes': len(classrooms)
     }
     return render(request, 'index.html', context)
 
@@ -66,7 +68,7 @@ def finance(request):
 @login_required(login_url='login')
 def display_students(request):
     try:
-        search = request.GET.get('search_student', '')
+        search = request.GET.get('search_student')
         if search:
             
             students = Student.objects.filter(
@@ -98,7 +100,7 @@ def display_classes(request):
     students = Student.objects.all()
     for classroom in classes:
         for student in students:
-            if student.classroom == classroom.name:
+            if student.classroom == classroom:
                 classroom.num_of_students += 1
             
 
@@ -150,25 +152,14 @@ def enroll(request):
     form = EnrollStudentForm()
     
     if request.method == 'POST':
-        fname = request.POST['fname']
-        lname = request.POST['lname']
-        other_names = request.POST['other_names']
-        category = request.POST['category']
-        classroom = request.POST['classroom']
-        fees_paid = request.POST['fees_paid']
-        date_enrolled = request.POST['date_enrolled']
-
-        new_student = Student.objects.create(
-            fname = fname,
-            lname = lname,
-            other_names = other_names,
-            category = category,
-            classroom = classroom,
-            fees_paid = fees_paid,
-            date_enrolled = date_enrolled
-        )
-        new_student.save()
-        return redirect('index')
+        form = EnrollStudentForm(request.POST)
+        if form.is_valid():
+            classroom = form.cleaned_data['classroom']
+            classroom = Classroom.objects.get(name=classroom)
+            classroom.num_of_students += 1
+            classroom.save()
+            form.save()
+        return redirect('students')
     
     context = {'classes': classes, 'form': form}
 

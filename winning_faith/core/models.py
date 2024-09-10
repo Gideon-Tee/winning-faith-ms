@@ -35,7 +35,7 @@ class Student(models.Model):
     classroom = models.ForeignKey('Classroom', to_field='name', on_delete=models.PROTECT)
 
     def calcRemainingFees(self) -> float:
-        fee_required = fees.get(self.category, 0.0)
+        fee_required = fees.get(self.classroom.category, 0.0)
         fees_remaining = fee_required - float(self.fees_paid)
         print(f"Calculating remaining fees: fee_required={fee_required}, fees_paid={self.fees_paid}, remaining_fees={fees_remaining}")
 
@@ -43,7 +43,7 @@ class Student(models.Model):
     
     def isOwingFees(self) -> bool:
         # fee_required = 0.0
-        fee_required = fees.get(self.category, 0.0)
+        fee_required = fees.get(self.classroom.category, 0.0)
         return float(self.fees_paid) < float(fee_required)
     
     def getFullName(self) -> str:
@@ -53,6 +53,7 @@ class Student(models.Model):
         self.is_owing = self.isOwingFees()
         self.fees_rem = self.calcRemainingFees()
         self.full_name = self.getFullName()
+        self.classroom.num_of_students += 1
         super().save(*args, **kwargs)
 
     def __str__(self):
