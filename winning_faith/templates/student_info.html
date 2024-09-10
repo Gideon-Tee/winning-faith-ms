@@ -2,6 +2,12 @@
 {% load static %}
 
 {% block content %}
+<style>
+    a {
+    text-decoration: none;
+    color: black;
+}
+</style>
 <div class="container-fluid row home mt-4 p-5">
     
     {% block db_table_header %}
@@ -42,13 +48,16 @@
                 
                 {% if students %}
                 {% for student in students %}
+                <a href="{% url 'student' student.id %}" style="text-decoration: none; color: black;">
+                    
+                </a>
                 <tr>
-                    <td>{{student.lname}}</td>
-                    <td>{{student.fname}}</td>
-                    <td>{{student.other_names}}</td>
+                    <td><a href="{% url 'student' student.id %}">{{student.lname}}</a></td>
+                    <td><a href="{% url 'student' student.id %}">{{student.fname}}</a></td>
+                    <td><a href="{% url 'student' student.id %}">{{student.other_names}}</a></td>
                     <td>{{student.classroom}}</td>
                     <td>{{student.date_enrolled}}</td>
-                    <td>{{student.fees_paid}}</td>
+                    <td>{{student.fees_paid}}</td>   
                 </tr>
 
                 {% endfor %}

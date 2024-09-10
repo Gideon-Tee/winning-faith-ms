@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+    <div class="container-fluid home mt-4 p-5">
+        <h5 class="blue-text display-6 mb-4">Student Details</h5>
+        <div class="container bg-white p-3 rounded">
+            <table class="table table-striped">
+                <tr>
+                    <td>Full name</td>
+                    <td>{{student.full_name}}</td>
+                </tr>
+                <tr>
+                    <td>Class</td>
+                    <td>{{student.classroom}}</td>
+                </tr>
+                <tr>
+                    <td>Fees paid</td>
+                    <td>{{student.fees_paid}}</td>
+                </tr>
+                <tr>
+                    <td>Fees remaining</td>
+                    <td>{{student.fees_rem}}</td>
+                </tr>
+                <tr>
+                    <td>Date Admitted</td>
+                    <td>{{student.date_enrolled}}</td>
+                </tr>
+                <tr>
+                    <td>Guardian</td>
+                    <td>{{student.guardian_full_name}} <br>
+                        +233{{student.guardian_phone_number}} <br>
+                        {{student.guardian_relation}}
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+    </div>
+{% endblock content %}
+    

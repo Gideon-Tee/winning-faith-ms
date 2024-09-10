@@ -22,3 +22,7 @@
     max-height: 215px;
     overflow-y: auto;
 }
+table > tr > td > a {
+    text-decoration: none;
+    color: black;
+}

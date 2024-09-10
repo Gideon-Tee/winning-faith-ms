@@ -28,6 +28,7 @@ def index(request):
     return render(request, 'index.html', context)
 
 
+
 @login_required(login_url='login')
 def student_fees(request):
     classrooms = Classroom.objects.all()
@@ -65,6 +66,8 @@ def finance(request):
 
     return render(request, 'finance.html', context)
 
+
+
 @login_required(login_url='login')
 def display_students(request):
     try:
@@ -85,6 +88,8 @@ def display_students(request):
     }
     return render(request, 'student_info.html', context)
 
+
+
 @login_required(login_url='login')
 def display_teachers(request):
     teachers = Teacher.objects.all().order_by('fname', 'lname')
@@ -94,11 +99,13 @@ def display_teachers(request):
     return render(request, 'display_teachers.html', context)
 
 
+
 @login_required(login_url='login')
 def display_classes(request):
     classes = Classroom.objects.all()
     students = Student.objects.all()
     for classroom in classes:
+        classroom.num_of_students = 0
         for student in students:
             if student.classroom == classroom:
                 classroom.num_of_students += 1
@@ -127,6 +134,8 @@ def add_new_class(request):
     
     return render(request, 'add_new_class.html', {'form': form})
 
+
+
 @login_required(login_url='login')
 def add_teacher(request):
     form = TeacherForm()
@@ -145,6 +154,7 @@ def add_teacher(request):
 
     return render(request, 'add_teacher.html', context)
     
+
 
 @login_required(login_url='login')
 def enroll(request):
@@ -167,9 +177,24 @@ def enroll(request):
     return render(request, 'enroll.html', context)
 
 
+
+def student(request, id):
+    try:
+        student = Student.objects.get(id=id)
+    except Student.DoesNotExist:
+        print('student id not found')
+        messages.error(request, 'id not found in database')
+        return redirect('students')
+    
+    context = {'student': student}
+    return render(request, 'student-details.html', context)
+
+
 def settings(request):
 
     return render(request, 'settings.html')
+
+
 
 def login(request):
     if request.method == 'POST':
@@ -186,6 +211,7 @@ def login(request):
     else:
         return render(request, 'login.html')
     
+
 
 @login_required(login_url='login')
 def logout(request):
