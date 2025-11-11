@@ -1,1 +1,3 @@
-practiceVanilla.html
+venv/
+**/*.pyc
+
